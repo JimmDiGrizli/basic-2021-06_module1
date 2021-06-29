@@ -13,19 +13,20 @@ public class Character : MonoBehaviour
         Attack,
         BeginShoot,
         Shoot,
+        Death,
     }
 
     public enum Weapon
     {
         Pistol,
-        Bat,
+        Melee,
     }
 
     Animator animator;
     State state;
 
     public Weapon weapon;
-    public Transform target;
+    public Character target;
     public float runSpeed;
     public float distanceFromEnemy;
     Vector3 originalPosition;
@@ -43,12 +44,20 @@ public class Character : MonoBehaviour
     {
         state = newState;
     }
+    
+    public void KillTarget()
+    {
+        if (target == null) return;
+        target.SetState(State.Death);
+        target.animator.SetTrigger("Death");
+    }
 
     [ContextMenu("Attack")]
     void AttackEnemy()
     {
+        if (state == State.Death) return;
         switch (weapon) {
-            case Weapon.Bat:
+            case Weapon.Melee: 
                 state = State.RunningToEnemy;
                 break;
             case Weapon.Pistol:
@@ -91,7 +100,7 @@ public class Character : MonoBehaviour
 
             case State.RunningToEnemy:
                 animator.SetFloat("Speed", runSpeed);
-                if (RunTowards(target.position, distanceFromEnemy))
+                if (RunTowards(target.originalPosition, distanceFromEnemy))
                     state = State.BeginAttack;
                 break;
 
@@ -106,15 +115,9 @@ public class Character : MonoBehaviour
                 state = State.Attack;
                 break;
 
-            case State.Attack:
-                break;
-
             case State.BeginShoot:
                 animator.SetTrigger("Shoot");
                 state = State.Shoot;
-                break;
-
-            case State.Shoot:
                 break;
         }
     }
