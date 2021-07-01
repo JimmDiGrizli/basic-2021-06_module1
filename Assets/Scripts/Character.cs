@@ -55,7 +55,7 @@ public class Character : MonoBehaviour
     [ContextMenu("Attack")]
     void AttackEnemy()
     {
-        if (state == State.Death) return;
+        if (state == State.Death || target.state == State.Death) return;
         switch (weapon) {
             case Weapon.Melee: 
                 state = State.RunningToEnemy;
