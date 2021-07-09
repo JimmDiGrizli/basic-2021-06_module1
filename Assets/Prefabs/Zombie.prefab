@@ -101,6 +101,11 @@ PrefabInstance:
       propertyPath: distanceFromEnemy
       value: 1.2
       objectReference: {fileID: 0}
+    - target: {fileID: 6567282019067334689, guid: 73e1432563d8c1a48839445fb70ed3d9,
+        type: 3}
+      propertyPath: health
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7292729299804049137, guid: 73e1432563d8c1a48839445fb70ed3d9,
         type: 3}
       propertyPath: m_RootOrder
@@ -155,6 +160,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7307544399038836273, guid: 73e1432563d8c1a48839445fb70ed3d9,
+        type: 3}
+      propertyPath: damage
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8455690963370006717, guid: 73e1432563d8c1a48839445fb70ed3d9,
         type: 3}
