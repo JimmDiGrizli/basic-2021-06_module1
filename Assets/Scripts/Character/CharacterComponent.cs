@@ -39,6 +39,7 @@ namespace Assets.Scripts.Character
         State state;
 
         public Weapon weapon;
+        public Animation weaponEffect;
         public float runSpeed;
         public float distanceFromEnemy;
         Vector3 originalPosition;
@@ -161,6 +162,7 @@ namespace Assets.Scripts.Character
                     break;
 
                 case State.Shoot:
+                    if (weaponEffect) weaponEffect.Play();
                     break;
             }
         }
