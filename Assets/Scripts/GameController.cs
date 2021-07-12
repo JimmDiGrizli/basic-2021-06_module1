@@ -9,14 +9,16 @@ public class GameController : MonoBehaviour
 {
     [SerializeField] private CharacterComponent[] playerCharacters;
     [SerializeField] private CharacterComponent[] enemyCharacters;
-    
+
+    [SerializeField] private PauseController pauseController;
+
     private Coroutine gameLoop;
-    
+
     private void Start()
     {
         gameLoop = StartCoroutine(GameLoop());
     }
-    
+
     private IEnumerator GameLoop()
     {
         Coroutine turn = StartCoroutine(Turn(playerCharacters, enemyCharacters));
@@ -32,14 +34,14 @@ public class GameController : MonoBehaviour
     {
         bool isPlayerCharacterAlive = playerCharacters.FirstOrDefault(c => !c.HealthComponent.IsDead) == null;
         bool isEnemyCharacterAlive = enemyCharacters.FirstOrDefault(c => !c.HealthComponent.IsDead) == null;
-        
+
         if (!isPlayerCharacterAlive && !isEnemyCharacterAlive) return null;
-        return !isPlayerCharacterAlive ? "Victory" : "Defeat";
+        return !isPlayerCharacterAlive ? "victory" : "defeat";
     }
-    
+
     private void GameOver()
     {
-        Debug.Log(CheckWinner());
+        pauseController.Finish(CheckWinner() == "victory");
     }
 
     private IEnumerator Turn(CharacterComponent[] playerChars, CharacterComponent[] enemyChars)
@@ -49,12 +51,14 @@ public class GameController : MonoBehaviour
         {
             for (int i = 0; i < playerChars.Length; i++)
             {
-                if(playerChars[i].HealthComponent.IsDead)
+               // yield return new WaitWhile(() => isPause);
+                if (playerChars[i].HealthComponent.IsDead)
                 {
                     Debug.Log("");
                     Debug.Log("Character: " + playerChars[i].name + " is dead");
                     continue;
                 }
+
                 playerChars[i].SetTarget(GetTarget(enemyChars).HealthComponent);
                 //TODO: hotfix
                 yield return null; // ugly fix need to investigate
@@ -67,11 +71,13 @@ public class GameController : MonoBehaviour
 
             for (int i = 0; i < enemyChars.Length; i++)
             {
+              //  yield return new WaitWhile(() => isPause);
                 if (enemyChars[i].HealthComponent.IsDead)
                 {
                     Debug.Log("Enemy character: " + enemyChars[i].name + " is dead");
                     continue;
                 }
+
                 enemyChars[i].SetTarget(GetTarget(playerChars).HealthComponent);
                 enemyChars[i].StartTurn();
                 yield return new WaitUntilCharacterTurn(enemyChars[i]);
@@ -84,7 +90,7 @@ public class GameController : MonoBehaviour
             Debug.Log("Turn #" + turnCounter + " has been ended");
         }
     }
-    
+
     private CharacterComponent GetTarget(CharacterComponent[] characterComponents)
     {
         return characterComponents.FirstOrDefault(c => !c.HealthComponent.IsDead);
