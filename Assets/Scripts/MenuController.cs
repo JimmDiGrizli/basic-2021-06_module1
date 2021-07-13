@@ -5,9 +5,10 @@ public class MenuController : MonoBehaviour
 {
     enum Screen
     {
+        None,
         Main,
         Levels,
-        Settings
+        Settings,
     }
 
     public CanvasGroup mainScreen;
@@ -34,12 +35,18 @@ public class MenuController : MonoBehaviour
 
     public void StartLevel1()
     {
-        SceneManager.LoadScene("Level-1");
+        StartLevel("Level-1");
     }
     
     public void StartLevel2()
     {
-        SceneManager.LoadScene("Level-2");
+        StartLevel("Level-2");
+    }
+
+    private void StartLevel(string level)
+    {
+        SetCurrentScreen(Screen.None);
+        LoadingScreen.instance.LoadScene(level);
     }
 
     public void OpenSettings()
