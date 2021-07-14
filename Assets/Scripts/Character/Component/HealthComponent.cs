@@ -14,9 +14,18 @@ namespace Character.Component
         public Action<int> OnHealthChanged;
         public Action OnDead;
 
+        private DamageEffect damageEffect;
+
+        private void Start()
+        {
+            damageEffect = GetComponent<DamageEffect>();
+        }
+
         public void ApplyDamage(AttackComponent attackComponent)
         {
             health -= attackComponent.Damage;
+           
+            if (damageEffect) damageEffect.ShowDamageEffect();            
 
             if (health <= 0)
             {
