@@ -35,7 +35,6 @@ namespace Character.Component
 
         public Weapon weapon;
         public Animation weaponEffect;
-        public CharacterComponent target;
         public float runSpeed;
         public float distanceFromEnemy;
         Vector3 originalPosition;
@@ -129,7 +128,7 @@ namespace Character.Component
 
                 case State.RunningToEnemy:
                     animator.SetFloat("Speed", runSpeed);
-                    if (RunTowards(target.originalPosition, distanceFromEnemy))
+                    if (RunTowards(targetHealthComponent.transform.position, distanceFromEnemy))
                         state = State.BeginAttack;
                     break;
 
