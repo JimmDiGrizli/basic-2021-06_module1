@@ -34,6 +34,7 @@ namespace Character.Component
         State state;
 
         public Weapon weapon;
+        public Animation weaponEffect;
         public CharacterComponent target;
         public float runSpeed;
         public float distanceFromEnemy;
@@ -152,6 +153,7 @@ namespace Character.Component
 
         public void AttackFinished()
         {
+            if (weaponEffect) weaponEffect.Play();
             attackComponent.Attack(targetHealthComponent);
         }
     }
