@@ -273,6 +273,11 @@ PrefabInstance:
       propertyPath: lengthInSec
       value: 0.6
       objectReference: {fileID: 0}
+    - target: {fileID: 198348215081131160, guid: 3fe0df07025a3e747855b1bb671fc04e,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 198350373398895308, guid: 3fe0df07025a3e747855b1bb671fc04e,
         type: 3}
       propertyPath: looping
@@ -283,6 +288,11 @@ PrefabInstance:
       propertyPath: lengthInSec
       value: 0.6
       objectReference: {fileID: 0}
+    - target: {fileID: 198350373398895308, guid: 3fe0df07025a3e747855b1bb671fc04e,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 198633431477185036, guid: 3fe0df07025a3e747855b1bb671fc04e,
         type: 3}
       propertyPath: looping
@@ -292,6 +302,11 @@ PrefabInstance:
         type: 3}
       propertyPath: lengthInSec
       value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 198633431477185036, guid: 3fe0df07025a3e747855b1bb671fc04e,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 199179833194136312, guid: 3fe0df07025a3e747855b1bb671fc04e,
         type: 3}
