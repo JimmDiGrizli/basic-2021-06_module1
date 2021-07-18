@@ -46,12 +46,14 @@ public class GameController : MonoBehaviour
 
     private IEnumerator Turn(CharacterComponent[] playerChars, CharacterComponent[] enemyChars)
     {
+        //TODO: hotfix, ugly fix need to investigate
+        yield return null; 
+        
         int turnCounter = 0;
         while (true)
-        {
+        {      
             for (int i = 0; i < playerChars.Length; i++)
             {
-               // yield return new WaitWhile(() => isPause);
                 if (playerChars[i].HealthComponent.IsDead)
                 {
                     Debug.Log("");
@@ -60,8 +62,6 @@ public class GameController : MonoBehaviour
                 }
 
                 playerChars[i].SetTarget(GetTarget(enemyChars).HealthComponent);
-                //TODO: hotfix
-                yield return null; // ugly fix need to investigate
                 playerChars[i].StartTurn();
                 yield return new WaitUntilCharacterTurn(playerChars[i]);
                 Debug.Log("Character: " + playerChars[i].name + " finished turn");
@@ -71,7 +71,6 @@ public class GameController : MonoBehaviour
 
             for (int i = 0; i < enemyChars.Length; i++)
             {
-              //  yield return new WaitWhile(() => isPause);
                 if (enemyChars[i].HealthComponent.IsDead)
                 {
                     Debug.Log("Enemy character: " + enemyChars[i].name + " is dead");

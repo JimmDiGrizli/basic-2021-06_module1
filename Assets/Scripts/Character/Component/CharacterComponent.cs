@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Character.Component
 {
@@ -40,6 +41,8 @@ namespace Character.Component
         Vector3 originalPosition;
         Quaternion originalRotation;
 
+        public Action OnTurnEnded;
+
         void Start()
         {
             animator = GetComponentInChildren<Animator>();
@@ -62,20 +65,29 @@ namespace Character.Component
         {
             if (healthComponent.IsDead)
             {
-                //TODO: rework logic
-                attackComponent.OnAttackFinished?.Invoke(); // bad approach fix it
-                // probably need to locate such logic in some gifferent pace
+                OnTurnEnded.Invoke();
                 return;
             }
 
             AttackEnemy();
         }
 
+        public void FinishTurn()
+        {
+            OnTurnEnded.Invoke();
+        }
+
         public void SetState(State newState)
         {
             state = newState;
         }
-        
+
+        public void AttackFinished()
+        {
+            if (weaponEffect) weaponEffect.Play();
+            attackComponent.Attack(targetHealthComponent);
+        }
+
         [ContextMenu("Attack")]
         void AttackEnemy()
         {
@@ -135,7 +147,11 @@ namespace Character.Component
                 case State.RunningFromEnemy:
                     animator.SetFloat("Speed", runSpeed);
                     if (RunTowards(originalPosition, 0.0f))
+                    {
                         state = State.Idle;
+                        FinishTurn();
+                    }
+
                     break;
 
                 case State.BeginAttack:
@@ -148,12 +164,6 @@ namespace Character.Component
                     state = State.Shoot;
                     break;
             }
-        }
-
-        public void AttackFinished()
-        {
-            if (weaponEffect) weaponEffect.Play();
-            attackComponent.Attack(targetHealthComponent);
         }
     }
 }

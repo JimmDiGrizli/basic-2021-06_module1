@@ -15,6 +15,7 @@ namespace Character
         void ShootEnd()
         {
             _characterComponent.SetState(CharacterComponent.State.Idle);
+            _characterComponent.FinishTurn();
         }
 
         void AttackEnd()

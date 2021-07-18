@@ -14,10 +14,10 @@ namespace YieldInstruction
             void Action()
             {
                 _isKeepWiting = false;
-                character.AttackComponent.OnAttackFinished -= Action;
+                character.OnTurnEnded -= Action;
             }
 
-            character.AttackComponent.OnAttackFinished += Action;
+            character.OnTurnEnded += Action;
         }
     }
 }
