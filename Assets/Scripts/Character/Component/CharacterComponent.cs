@@ -10,6 +10,9 @@ namespace Character.Component
 
         [SerializeField] private AttackComponent attackComponent;
         public AttackComponent AttackComponent => attackComponent;
+        
+        [SerializeField] private TimerComponent timerComponent;
+        public TimerComponent TimerComponent => timerComponent;
 
         private HealthComponent targetHealthComponent;
 
@@ -65,7 +68,7 @@ namespace Character.Component
         {
             if (healthComponent.IsDead)
             {
-                OnTurnEnded.Invoke();
+                OnTurnEnded?.Invoke();
                 return;
             }
 
@@ -74,7 +77,7 @@ namespace Character.Component
 
         public void FinishTurn()
         {
-            OnTurnEnded.Invoke();
+            OnTurnEnded?.Invoke();
         }
 
         public void SetState(State newState)
@@ -127,6 +130,12 @@ namespace Character.Component
 
             transform.position = targetPosition;
             return true;
+        }
+
+
+        void OnMouseOver()
+        {
+            Debug.Log("Mouse is over GameObject.");
         }
 
         void FixedUpdate()

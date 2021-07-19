@@ -133,6 +133,11 @@ PrefabInstance:
       propertyPath: healthComponent
       value: 
       objectReference: {fileID: 6592965390334801819}
+    - target: {fileID: 5929513236190159777, guid: 73e1432563d8c1a48839445fb70ed3d9,
+        type: 3}
+      propertyPath: waitingTime
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6567282019067334689, guid: 73e1432563d8c1a48839445fb70ed3d9,
         type: 3}
       propertyPath: health

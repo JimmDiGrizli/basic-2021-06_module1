@@ -6,14 +6,14 @@ namespace YieldInstruction
 {
     public class WaitUntilCharacterTurn : CustomYieldInstruction
     {
-        private bool _isKeepWiting = true;
-        public override bool keepWaiting => _isKeepWiting;
+        private bool isKeepWiting = true;
+        public override bool keepWaiting => isKeepWiting;
         
         public WaitUntilCharacterTurn(CharacterComponent character)
         {
             void Action()
             {
-                _isKeepWiting = false;
+                isKeepWiting = false;
                 character.OnTurnEnded -= Action;
             }
 
