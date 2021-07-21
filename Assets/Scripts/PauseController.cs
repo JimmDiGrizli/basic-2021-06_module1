@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using Sound;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,9 +14,13 @@ public class PauseController : MonoBehaviour
         Finish
     }
 
-    public CanvasGroup gameScreen;
-    public CanvasGroup pauseScreen;
-    public CanvasGroup finishScreen;
+    [SerializeField] private CanvasGroup gameScreen;
+    [SerializeField] private CanvasGroup pauseScreen;
+    [SerializeField] private CanvasGroup finishScreen;
+
+    [SerializeField] private string loseSound;
+    [SerializeField] private string winSound;
+    private SoundPlayer soundPlayer;
 
     void SetCurrentScreen(Screen screen)
     {
@@ -25,6 +31,7 @@ public class PauseController : MonoBehaviour
 
     void Start()
     {
+        soundPlayer = GetComponent<SoundPlayer>();
         Game();
     }
     
@@ -42,6 +49,7 @@ public class PauseController : MonoBehaviour
     
     public void Finish(bool isPlayerWon)
     {
+        if(soundPlayer) soundPlayer.Play(isPlayerWon ? winSound : loseSound);
         var text =  finishScreen.GetComponentInChildren<TextMeshProUGUI>();
         text.text = isPlayerWon ? "You won." : "You lose.";
         SetCurrentScreen(Screen.Finish);

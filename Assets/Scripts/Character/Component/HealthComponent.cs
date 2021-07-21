@@ -1,4 +1,5 @@
 using System;
+using Sound;
 using UnityEngine;
 
 namespace Character.Component
@@ -15,10 +16,14 @@ namespace Character.Component
         public Action OnDead;
 
         private DamageEffect damageEffect;
+        [SerializeField] private string damageSound;
+        [SerializeField] private string dieSound;
+        private SoundPlayer soundPlayer;
 
         private void Start()
         {
             damageEffect = GetComponent<DamageEffect>();
+            soundPlayer = GetComponentInChildren<SoundPlayer>();
         }
 
         public void ApplyDamage(AttackComponent attackComponent)
@@ -33,6 +38,8 @@ namespace Character.Component
                 health = 0;
                 OnDead?.Invoke();
             }
+
+            if (soundPlayer) soundPlayer.Play(isDead ? dieSound : damageSound);
 
             OnHealthChanged?.Invoke(health);
         }

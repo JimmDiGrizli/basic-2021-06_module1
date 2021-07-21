@@ -116,6 +116,11 @@ PrefabInstance:
       propertyPath: health
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 6567282019067334689, guid: 73e1432563d8c1a48839445fb70ed3d9,
+        type: 3}
+      propertyPath: dieSound
+      value: die1
+      objectReference: {fileID: 0}
     - target: {fileID: 7292729299804049137, guid: 73e1432563d8c1a48839445fb70ed3d9,
         type: 3}
       propertyPath: m_RootOrder
@@ -176,10 +181,15 @@ PrefabInstance:
       propertyPath: damage
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7307544399038836273, guid: 73e1432563d8c1a48839445fb70ed3d9,
+        type: 3}
+      propertyPath: attackSound
+      value: HandHit
+      objectReference: {fileID: 0}
     - target: {fileID: 7658454531214226399, guid: 73e1432563d8c1a48839445fb70ed3d9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8455690963370006717, guid: 73e1432563d8c1a48839445fb70ed3d9,
         type: 3}

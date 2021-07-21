@@ -1,10 +1,7 @@
-using System.Collections;
 using System.Linq;
 using Character.Component;
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
-using YieldInstruction;
 
 public class GameController : MonoBehaviour
 {
@@ -119,7 +116,6 @@ public class GameController : MonoBehaviour
 
         currentPlayerCharacter.OnTurnEnded += RunTimers;
     }
-
 
     private bool CheckWinner()
     {
