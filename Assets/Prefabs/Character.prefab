@@ -180,7 +180,8 @@ AudioSource:
   m_GameObject: {fileID: 5232199405286279415}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8882543139415772751, guid: 0b5d5f52790371e4bac38f7eb5ebc2ab,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -339,6 +340,7 @@ MonoBehaviour:
   health: 4
   isDead: 0
   damageSound: TakeDamageShort
+  dieSound: 
 --- !u!114 &7307544399038836273
 MonoBehaviour:
   m_ObjectHideFlags: 0

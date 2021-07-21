@@ -21,6 +21,12 @@ namespace Sound
             source.Play();
         }
 
+        public void PlayClip(AudioClip clip)
+        {
+            source.clip = clip;
+            source.Play();
+        }
+
         [CanBeNull]
         private AudioClip FindClip(string clipName)
         {
