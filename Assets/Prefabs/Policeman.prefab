@@ -130,6 +130,12 @@ PrefabInstance:
       objectReference: {fileID: 7292695370404120971}
     - target: {fileID: 3697664828200059437, guid: 73e1432563d8c1a48839445fb70ed3d9,
         type: 3}
+      propertyPath: characteristics
+      value: 
+      objectReference: {fileID: 11400000, guid: 932acefa72e209748b478413a26de084,
+        type: 2}
+    - target: {fileID: 3697664828200059437, guid: 73e1432563d8c1a48839445fb70ed3d9,
+        type: 3}
       propertyPath: healthComponent
       value: 
       objectReference: {fileID: 6592965390334801819}

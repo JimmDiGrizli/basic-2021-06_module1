@@ -6,7 +6,7 @@ namespace Character.Component
 {
     public class AttackComponent : MonoBehaviour
     {
-        public int damage;
+        private int damage;
         public int Damage => damage;
 
         private Action OnAttackFinished;
@@ -17,6 +17,11 @@ namespace Character.Component
         private void Start()
         {
             soundPlayer = GetComponentInChildren<SoundPlayer>();
+        }
+
+        public void Configuration(Characteristics characteristics)
+        {
+            damage = characteristics.Damage;
         }
 
         public void Attack(HealthComponent healthComponent)

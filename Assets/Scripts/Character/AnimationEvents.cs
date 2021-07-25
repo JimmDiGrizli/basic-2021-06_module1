@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Character
 {
-    public class CharacterAnimationEvents : MonoBehaviour
+    public class AnimationEvents : MonoBehaviour
     {
         CharacterComponent _characterComponent;
 

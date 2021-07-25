@@ -5,12 +5,10 @@ namespace Character.Component
 {
     public class TimerComponent : MonoBehaviour
     {
-        [SerializeField] private float waitingTime;
-        public float WaitingTime => waitingTime;
-        
+        private float waitingTime;
         private float countdown;
 
-        private bool timeRunning = false;
+        private bool timeRunning;
         public void Pause() => timeRunning = false;
         public void Run() => timeRunning = true;
 
@@ -18,7 +16,12 @@ namespace Character.Component
 
         private void Start() => countdown = waitingTime;
 
-        void Update()
+        public void Configuration(Characteristics characteristics)
+        {
+            waitingTime = characteristics.WaitingTime;
+        }
+
+        private void Update()
         {
             if (timeRunning == false) return;
             

@@ -26,7 +26,7 @@ public class GameController : MonoBehaviour
         for (var index = 0; index < buttons.Length; index++)
         {
             var button = buttons[index];
-            if (enemyCharacters.Count() > index && enemyCharacters[index].HealthComponent.isDead == false)
+            if (enemyCharacters.Count() > index && enemyCharacters[index].HealthComponent.IsDead == false)
             {
                 var enemy = enemyCharacters[index];
                 button.GetComponentInChildren<Text>().text = enemy.gameObject.name;

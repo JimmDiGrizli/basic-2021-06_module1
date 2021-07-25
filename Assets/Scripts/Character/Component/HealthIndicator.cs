@@ -11,7 +11,7 @@ namespace Character.Component
         {
             textMesh = GetComponent<TextMesh>();
             healthComponent = GetComponentInParent<HealthComponent>();
-            IndicatorUpdate(healthComponent.health);
+            IndicatorUpdate(healthComponent.Health);
             healthComponent.OnHealthChanged += IndicatorUpdate;
         }
 

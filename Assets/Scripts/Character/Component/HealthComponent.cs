@@ -4,21 +4,46 @@ using UnityEngine;
 
 namespace Character.Component
 {
+    [RequireComponent(typeof(DamageEffect))]
+    [AddComponentMenu("Character/HealthComponent")]
     public class HealthComponent : MonoBehaviour
     {
-        [SerializeField] public int health;
-        public int Health => health;
-
-        [SerializeField] public bool isDead;
-        public bool IsDead => isDead;
+        public int Health { get; private set; }
+        public bool IsDead { get; private set; }
 
         public Action<int> OnHealthChanged;
         public Action OnDead;
 
         private DamageEffect damageEffect;
-        [SerializeField] private string damageSound;
-        [SerializeField] private string dieSound;
+        [ContextMenuItem("Tools/Check", "Check")] [SerializeField]
+        private string damageSound;
+
+        [ContextMenuItem("Tools/Check", "Check")] [SerializeField]
+        private string dieSound;
         private SoundPlayer soundPlayer;
+
+        public void Configuration(Characteristics characteristics)
+        {
+            Health = characteristics.Health;
+        }
+
+        public void ApplyDamage(AttackComponent attackComponent)
+        {
+            Health -= attackComponent.Damage;
+
+            if (damageEffect) damageEffect.ShowDamageEffect();
+
+            if (Health <= 0)
+            {
+                IsDead = true;
+                Health = 0;
+                OnDead?.Invoke();
+            }
+
+            if (soundPlayer) soundPlayer.Play(IsDead ? dieSound : damageSound);
+
+            OnHealthChanged?.Invoke(Health);
+        }
 
         private void Start()
         {
@@ -26,22 +51,12 @@ namespace Character.Component
             soundPlayer = GetComponentInChildren<SoundPlayer>();
         }
 
-        public void ApplyDamage(AttackComponent attackComponent)
+        [ContextMenu("Tools/Check")]
+        private void Check()
         {
-            health -= attackComponent.Damage;
-           
-            if (damageEffect) damageEffect.ShowDamageEffect();            
-
-            if (health <= 0)
-            {
-                isDead = true;
-                health = 0;
-                OnDead?.Invoke();
-            }
-
-            if (soundPlayer) soundPlayer.Play(isDead ? dieSound : damageSound);
-
-            OnHealthChanged?.Invoke(health);
+            if (damageSound == null) Debug.Log("Not set damageSound.");
+            else if (dieSound == null) Debug.Log("Not set dieSound.");
+            else Debug.Log("It's ok!");
         }
     }
 }

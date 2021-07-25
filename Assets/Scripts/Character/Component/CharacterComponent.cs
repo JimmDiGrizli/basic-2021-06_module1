@@ -1,16 +1,19 @@
 ﻿using System;
+using UnityEditor;
 using UnityEngine;
 
 namespace Character.Component
 {
+    [RequireComponent(typeof(TimerComponent))]
+    [RequireComponent(typeof(HealthComponent))]
+    [RequireComponent(typeof(AttackComponent))]
     public class CharacterComponent : MonoBehaviour
     {
-        [SerializeField] private HealthComponent healthComponent;
-        public HealthComponent HealthComponent => healthComponent;
+        [SerializeField] private Characteristics characteristics;
 
         [SerializeField] private AttackComponent attackComponent;
-        public AttackComponent AttackComponent => attackComponent;
-        
+        [SerializeField] private HealthComponent healthComponent;
+        public HealthComponent HealthComponent => healthComponent;
         [SerializeField] private TimerComponent timerComponent;
         public TimerComponent TimerComponent => timerComponent;
 
@@ -28,23 +31,32 @@ namespace Character.Component
             Death,
         }
 
-        public enum Weapon
+        private enum Weapon
         {
             Pistol,
             Melee,
         }
 
-        Animator animator;
-        State state;
+        private Animator animator;
+        private State state;
 
-        public Weapon weapon;
-        public Animation weaponEffect;
-        public float runSpeed;
-        public float distanceFromEnemy;
-        Vector3 originalPosition;
-        Quaternion originalRotation;
+        [SerializeField] private Weapon weapon;
+        [SerializeField]  private Animation weaponEffect;
+
+        [SerializeField] private float runSpeed;
+        [SerializeField] private float distanceFromEnemy;
+        private Vector3 originalPosition;
+        private Quaternion originalRotation;
 
         public Action OnTurnEnded;
+
+        public void Awake()
+        {
+
+            healthComponent.Configuration(characteristics);
+            attackComponent.Configuration(characteristics);
+            timerComponent.Configuration(characteristics);
+        }
 
         void Start()
         {
@@ -132,14 +144,9 @@ namespace Character.Component
             return true;
         }
 
-
-        void OnMouseOver()
-        {
-            Debug.Log("Mouse is over GameObject.");
-        }
-
         void FixedUpdate()
         {
+
             switch (state)
             {
                 case State.Idle:
