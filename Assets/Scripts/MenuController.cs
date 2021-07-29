@@ -46,7 +46,7 @@ public class MenuController : MonoBehaviour
     private void StartLevel(string level)
     {
         SetCurrentScreen(Screen.None);
-        LoadingScreen.instance.LoadScene(level);
+        LoadingScreen.Instance.LoadScene(level);
     }
 
     public void OpenSettings()

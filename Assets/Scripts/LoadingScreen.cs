@@ -1,24 +1,17 @@
 using System.Collections;
+using Infra;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LoadingScreen : MonoBehaviour
+public class LoadingScreen : SingletonMonoBehaviour<LoadingScreen>
 {
     [SerializeField] private Image progressBar;
     private CanvasGroup canvasGroup;
-    public static LoadingScreen instance { get; private set; }
-    
-    private void Awake()
-    {
-        if (instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
 
-        instance = this;
-        DontDestroyOnLoad(gameObject);
+    private new void Awake()
+    {
+        base.Awake();
         canvasGroup = GetComponentInChildren<CanvasGroup>();
         Utility.SetCanvasGroupEnabled(canvasGroup, false);
     }
@@ -40,8 +33,8 @@ public class LoadingScreen : MonoBehaviour
         Utility.SetCanvasGroupEnabled(canvasGroup, false);
     }
 
-    public void LoadScene(string name)
+    public void LoadScene(string sceneName)
     {
-        StartCoroutine(AsyncLoadScene(name));
+        StartCoroutine(AsyncLoadScene(sceneName));
     }
 }
